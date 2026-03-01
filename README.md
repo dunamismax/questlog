@@ -1,64 +1,76 @@
-<p align="center">
-  <img src="public/favicon.svg" alt="MyLife RPG logo" width="84" />
-</p>
+# MyLife RPG
 
-# MyLife RPG (TypeScript Rewrite)
+Gamified productivity system that turns daily habits, tasks, and goals into RPG progression. Quests, XP, leveling, stats, and achievements — all backed by a real database and designed for long-term use.
 
-MyLife RPG is now rewritten to a Bun-first TypeScript stack with React Router framework mode (SPA-first), Tailwind CSS, shadcn/ui-style components, Postgres, Drizzle ORM, Biome, and Zod.
+## Features
 
-## Stack
+- **RPG progression engine** — XP, leveling, stat allocation, and achievement tracking
+- **Quest system** — create and complete quests tied to real-world goals
+- **Habit tracking** — recurring habits with streak mechanics
+- **Domain-driven design** — RPG rules live in a testable engine, independent of UI
+- **Drizzle ORM** — type-safe Postgres schema with migrations
+- **shadcn/ui patterns** — Radix primitives + Tailwind + class-variance-authority
 
-- Runtime/package manager/task runner: Bun
-- Formatting/linting: Biome
-- Frontend app/routing: Vite + React Router framework mode (SPA-first)
-- UI runtime: React 19.2 + TypeScript
-- Styling/components: Tailwind CSS + shadcn/ui patterns
-- Database: Postgres
-- ORM/migrations: Drizzle ORM + drizzle-kit
-- Validation: Zod
-- Authentication baseline: Auth.js (integrate when login/session flow is added)
+## Prerequisites
 
-## Repository layout
+- [Bun](https://bun.sh)
+- PostgreSQL
 
-- `app/` React Router routes, UI components, RPG domain logic
-- `public/` static assets
-- `drizzle/` schema and migrations
-- `scripts/` Bun TypeScript orchestration scripts
-- `docs/` architecture and operational documentation
-- `tests/` domain and app behavior tests
-
-## Quick start
+## Quick Start
 
 ```bash
-cp .env.example .env
+git clone https://github.com/dunamismax/mylife-rpg.git
+cd mylife-rpg
 bun install
+cp .env.example .env
+# configure DATABASE_URL in .env
+bun run db:migrate
 bun run dev
 ```
 
-## Database commands
+## Commands
 
-```bash
-bun run db:generate
-bun run db:migrate
-bun run db:studio
+| Command | Description |
+|---|---|
+| `bun run dev` | Start dev server |
+| `bun run build` | Production build |
+| `bun run start` | Start production server |
+| `bun run lint` | Biome lint check |
+| `bun run format` | Biome auto-format |
+| `bun run typecheck` | TypeScript type check |
+| `bun run test` | Run Bun tests |
+| `bun run db:generate` | Generate Drizzle migrations |
+| `bun run db:migrate` | Run database migrations |
+| `bun run db:studio` | Open Drizzle Studio |
+
+## Stack
+
+- **Runtime**: Bun
+- **Frontend**: React 19 · React Router 7 (framework mode) · Tailwind CSS v4
+- **Components**: shadcn/ui patterns (Radix + CVA)
+- **Database**: PostgreSQL · Drizzle ORM
+- **Validation**: Zod
+- **Tooling**: Biome · TypeScript 5.9
+
+## Project Structure
+
 ```
-
-## Verification commands
-
-```bash
-bun run lint
-bun run typecheck
-bun run build
-bun run test
+app/                    # React frontend
+  routes/               # Route modules
+  components/           # UI components
+  lib/                  # RPG engine, utilities, types
+    rpg-engine.ts       # Core progression rules (testable)
+drizzle/                # Schema and migrations
+scripts/                # Orchestration scripts
+tests/                  # Domain and behavior tests
+docs/                   # Architecture documentation
+public/                 # Static assets
 ```
-
-## Status
-
-- New feature work targets the TypeScript app and Drizzle schema.
-- RPG progression rules live in `app/lib/rpg-engine.ts` and are validated with Bun tests.
 
 ## Documentation
 
-- `SOUL.md`: project identity and product taste
-- `AGENTS.md`: execution contract and done criteria
-- `docs/architecture.md`: rewrite architecture notes
+- [`docs/architecture.md`](docs/architecture.md) — architecture notes
+
+## License
+
+[MIT](LICENSE)
